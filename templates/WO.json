@@ -1,0 +1,19 @@
+{
+    "VMname":"EQX-Test",
+    "OS" : "WS19",
+    "Role": "DJVan",
+    "vCPU" : "2",
+    "RAM" : "2048MB",
+    "vdisks" : {
+        "vdisk0" : {
+            "size" : "40GB",
+            "format" : "raw"
+        }
+    },
+    "Network" : "br0.16",
+    "Display" : "vnc",
+    "Credentials" : {
+        "username" : "Administrator",
+        "password" : "YourMom!!1"
+    }
+}
