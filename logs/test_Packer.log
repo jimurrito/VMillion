@@ -1,0 +1,56 @@
+vars.auto.pkrvars.hcl
+The configuration is valid.
+[1;32mqemu.VMillion: output will be in this color.[0m
+
+[1;32m==> qemu.VMillion: Retrieving ISO[0m
+[1;32m==> qemu.VMillion: Trying /cd_disk/KVM/iso/winserver_2022.iso[0m
+[1;32m==> qemu.VMillion: Trying /cd_disk/KVM/iso/winserver_2022.iso?checksum=md5%3Ae7908933449613edc97e1b11180429d1[0m
+[1;32m==> qemu.VMillion: /cd_disk/KVM/iso/winserver_2022.iso?checksum=md5%3Ae7908933449613edc97e1b11180429d1 => /cd_disk/KVM/iso/winserver_2022.iso[0m
+[1;32m==> qemu.VMillion: Creating floppy disk...[0m
+[0;32m    qemu.VMillion: Copying files flatly from floppy_files[0m
+[0;32m    qemu.VMillion: Copying file: ./answer_files/autounattend.xml[0m
+[0;32m    qemu.VMillion: Copying file: ./answer_files/djsp.pwd[0m
+[0;32m    qemu.VMillion: Done copying files from floppy_files[0m
+[0;32m    qemu.VMillion: Collecting paths from floppy_dirs[0m
+[0;32m    qemu.VMillion: Resulting paths from floppy_dirs : [][0m
+[0;32m    qemu.VMillion: Done copying paths from floppy_dirs[0m
+[0;32m    qemu.VMillion: Copying files from floppy_content[0m
+[0;32m    qemu.VMillion: Done copying files from floppy_content[0m
+[1;32m==> qemu.VMillion: Creating CD disk...[0m
+[0;32m    qemu.VMillion: Warning: creating filesystem with Joliet extensions but without Rock Ridge[0m
+[0;32m    qemu.VMillion: extensions. It is highly recommended to add Rock Ridge.[0m
+[0;32m    qemu.VMillion: I: -input-charset not specified, using utf-8 (detected in locale settings)[0m
+[0;32m    qemu.VMillion: 19.75% done, estimate finish Tue Apr 26 12:07:44 2022[0m
+[0;32m    qemu.VMillion: 39.42% done, estimate finish Tue Apr 26 12:07:44 2022[0m
+[0;32m    qemu.VMillion: 59.15% done, estimate finish Tue Apr 26 12:07:44 2022[0m
+[0;32m    qemu.VMillion: 78.81% done, estimate finish Tue Apr 26 12:07:44 2022[0m
+[0;32m    qemu.VMillion: 98.53% done, estimate finish Tue Apr 26 12:07:44 2022[0m
+[0;32m    qemu.VMillion: Total translation table size: 0[0m
+[0;32m    qemu.VMillion: Total rockridge attributes bytes: 0[0m
+[0;32m    qemu.VMillion: Total directory bytes: 32918[0m
+[0;32m    qemu.VMillion: Path table size(bytes): 232[0m
+[0;32m    qemu.VMillion: Max brk space used 23000[0m
+[0;32m    qemu.VMillion: 25377 extents written (49 MB)[0m
+[0;32m    qemu.VMillion: Done copying paths from CD_dirs[0m
+[1;32m==> qemu.VMillion: Found port for communicator (SSH, WinRM, etc): 3939.[0m
+[1;32m==> qemu.VMillion: Looking for available port between 5900 and 6000 on 0.0.0.0[0m
+[1;32m==> qemu.VMillion: Starting VM, booting from CD-ROM[0m
+[0;32m    qemu.VMillion: The VM will be run headless, without a GUI. If you want to
+    qemu.VMillion: view the screen of the VM, connect via VNC without a password to
+    qemu.VMillion: vnc://0.0.0.0:5933[0m
+[1;32m==> qemu.VMillion: Overriding default Qemu arguments with qemuargs template option...[0m
+[1;32m==> qemu.VMillion: Waiting 5s for boot...[0m
+[1;32m==> qemu.VMillion: Connecting to VM via VNC (0.0.0.0:5933)[0m
+[1;32m==> qemu.VMillion: Typing the boot command over VNC...[0m
+[0;32m    qemu.VMillion: Not using a NetBridge -- skipping StepWaitGuestAddress[0m
+[1;32m==> qemu.VMillion: Using WinRM communicator to connect: 127.0.0.1[0m
+[1;32m==> qemu.VMillion: Waiting for WinRM to become available...[0m
+[0;32m    qemu.VMillion: WinRM connected.[0m
+[1;32m==> qemu.VMillion: Connected to WinRM![0m
+[1;32m==> qemu.VMillion: Gracefully halting virtual machine...[0m
+[1;32mBuild 'qemu.VMillion' finished after 21 minutes 29 seconds.[0m
+
+==> Wait completed after 21 minutes 29 seconds
+
+==> Builds finished. The artifacts of successful builds are:
+--> qemu.VMillion: VM files in directory: /kvm/test

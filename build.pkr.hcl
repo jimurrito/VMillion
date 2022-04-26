@@ -27,14 +27,20 @@ variable "PassWord" {
 variable "OutputPath" {
   type = string
 }
+variable "isoPath" {
+  type = string
+}
+variable "isoSum" {
+  type = string
+}
 
 
 
 source "qemu" "VMillion" {
   # ISO Image
   # Use ISO on fastest storage to increase speed of install
-  iso_url      = "/iso/winserver_2019.iso"
-  iso_checksum = "md5:70fec2cb1d6759108820130c2b5496da"
+  iso_url      = var.isoPath
+  iso_checksum = var.isoSum
 
   # H-Visor Settings
   accelerator = "kvm"

@@ -1,0 +1,20 @@
+{
+    "VMName": "<string>",
+    "OS": "<int>",
+    "Role": "<int>",
+    "AutoStart": "<int>",
+    "vCPU": "<int>",
+    "RAM": "<int>",
+    "vdisks": {
+        "vdisk0": {
+            "Size": "<int>",
+            "Format": "raw"
+        }
+    },
+    "Network": "<br0.X>",
+    "Display": "vnc",
+    "Credentials": {
+        "Username": "",
+        "Password": ""
+    }
+}

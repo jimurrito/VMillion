@@ -1,0 +1,15 @@
+                <SynchronousCommand wcm:action="add">
+                    <CommandLine>Powershell -ExecutionPolicy ByPass -File E:\Post-Build\scripts\winRM_config_enable.ps1</CommandLine>
+                    <Description>Enables WinRM for Packer</Description>
+                    <Order>1</Order>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <CommandLine>E:\Post-Build\guest-agent\qemu-ga-x86_64.msi</CommandLine>
+                    <Description>Installs QEMU Guest Agent</Description>
+                    <Order>2</Order>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <CommandLine>Powershell -ExecutionPolicy ByPass -File E:\Post-Build\scripts\rdp.ps1</CommandLine>
+                    <Description>Enables RDP</Description>
+                    <Order>3</Order>
+                </SynchronousCommand>

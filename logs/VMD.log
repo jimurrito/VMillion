@@ -1,0 +1,65 @@
+
+
+888     888 888b     d888 d8b 888 888 d8b                   
+888     888 8888b   d8888 Y8P 888 888 Y8P                   
+888     888 88888b.d88888     888 888                       
+Y88b   d88P 888Y88888P888 888 888 888 888  .d88b.  88888b.  
+ Y88b d88P  888 Y888P 888 888 888 888 888 d88""88b 888 "88b 
+  Y88o88P   888  Y8P  888 888 888 888 888 888  888 888  888 
+   Y888P    888   "   888 888 888 888 888 Y88..88P 888  888 
+    Y8P     888       888 888 888 888 888  "Y88P"  888  888 
+
+        <>  Automated KVM/QEMU Domain Creator  <>
+
+Build: 1.01.42522
+Built by: Jimurrito - https://github.com/jimurrito/
+
+[2022-04-26T12:06:58]-[PREP]-[Start-Up]-[Start-Up]
+[2022-04-26T12:06:58]-[PREP]-[Waiting]-[Looking for New WorkOrders... (1/5)]
+[2022-04-26T12:06:58]-[PREP]-[Waiting]-[(1) WorkOrder(s) Found]
+[2022-04-26T12:06:58]-[BUILD]-[Configuration]-[Working on Job (1/1)]
+[2022-04-26T12:06:58]-[BUILD]-[Configuration]-[Injesting and Parsing WorkOrders]
+[2022-04-26T12:06:58]-[BUILD]-[Configuration]-[Domain 'test' not currently defined.]
+[2022-04-26T12:06:58]-[BUILD]-[Configuration]-[Files for Domain 'test' not Found. Building Domain.]
+[2022-04-26T12:06:58]-[BUILD]-[Configuration]-[Domain 'test' OS will be 'Windows-Server 22']
+[2022-04-26T12:06:58]-[BUILD]-[Configuration]-[Domain 'test' Role will be 'Vanilla']
+[2022-04-26T12:06:58]-[BUILD]-[Configuration]-[New AutoUnattend.xml Generated]
+[2022-04-26T12:06:58]-[BUILD]-[Configuration]-[New Packer Variable File Generated]
+[2022-04-26T12:06:58]-[BUILD]-[Configuration]-[New WinRM Configuration File Generated]
+[2022-04-26T12:06:58]-[PACKER]-[Configuration]-[Packer Initilizing]
+[2022-04-26T12:06:59]-[PACKER]-[Configuration]-[Packer Formating Template]
+[2022-04-26T12:06:59]-[PACKER]-[Configuration]-[Packer Validation of Template]
+[2022-04-26T12:07:00]-[PACKER]-[Configuration]-[Packer Build Starting]
+[2022-04-26T12:28:29]-[PACKER]-[Configuration]-[Packer Build Build Complete]
+[2022-04-26T12:28:29]-[KVM]-[Configuration]-[Generating KVM|QEMU Domain]
+[2022-04-26T12:28:34]-[KVM]-[Configuration]-[Domain Successfully Deployed]
+[2022-04-26T12:28:34]-[PREP]-[Waiting]-[Looking for New WorkOrders... (1/5)]
+[2022-04-26T12:28:34]-[PREP]-[Waiting]-[No WorkOrders Found, Going into Short Rest (30 Sec)]
+[2022-04-26T12:29:04]-[PREP]-[Waiting]-[Looking for New WorkOrders... (2/5)]
+[2022-04-26T12:29:04]-[PREP]-[Waiting]-[No WorkOrders Found, Going into Short Rest (30 Sec)]
+[2022-04-26T12:29:34]-[PREP]-[Waiting]-[Looking for New WorkOrders... (3/5)]
+[2022-04-26T12:29:34]-[PREP]-[Waiting]-[No WorkOrders Found, Going into Short Rest (30 Sec)]
+[2022-04-26T12:30:04]-[PREP]-[Waiting]-[Looking for New WorkOrders... (4/5)]
+[2022-04-26T12:30:04]-[PREP]-[Waiting]-[No WorkOrders Found, Going into Short Rest (30 Sec)]
+[2022-04-26T12:30:34]-[PREP]-[Waiting]-[Looking for New WorkOrders... (5/5)]
+[2022-04-26T12:30:34]-[PREP]-[Waiting]-[Going into Long Rest (5 Min)]
+[2022-04-26T12:35:35]-[PREP]-[Waiting]-[Looking for New WorkOrders... (1/5)]
+[2022-04-26T12:35:35]-[PREP]-[Waiting]-[No WorkOrders Found, Going into Short Rest (30 Sec)]
+[2022-04-26T12:36:05]-[PREP]-[Waiting]-[Looking for New WorkOrders... (2/5)]
+[2022-04-26T12:36:05]-[PREP]-[Waiting]-[No WorkOrders Found, Going into Short Rest (30 Sec)]
+[2022-04-26T12:36:35]-[PREP]-[Waiting]-[Looking for New WorkOrders... (3/5)]
+[2022-04-26T12:36:35]-[PREP]-[Waiting]-[No WorkOrders Found, Going into Short Rest (30 Sec)]
+[2022-04-26T12:37:05]-[PREP]-[Waiting]-[Looking for New WorkOrders... (4/5)]
+[2022-04-26T12:37:05]-[PREP]-[Waiting]-[No WorkOrders Found, Going into Short Rest (30 Sec)]
+[2022-04-26T12:37:35]-[PREP]-[Waiting]-[Looking for New WorkOrders... (5/5)]
+[2022-04-26T12:37:35]-[PREP]-[Waiting]-[Going into Long Rest (5 Min)]
+[2022-04-26T12:42:35]-[PREP]-[Waiting]-[Looking for New WorkOrders... (1/5)]
+[2022-04-26T12:42:35]-[PREP]-[Waiting]-[No WorkOrders Found, Going into Short Rest (30 Sec)]
+[2022-04-26T12:43:05]-[PREP]-[Waiting]-[Looking for New WorkOrders... (2/5)]
+[2022-04-26T12:43:05]-[PREP]-[Waiting]-[No WorkOrders Found, Going into Short Rest (30 Sec)]
+[2022-04-26T12:43:35]-[PREP]-[Waiting]-[Looking for New WorkOrders... (3/5)]
+[2022-04-26T12:43:35]-[PREP]-[Waiting]-[No WorkOrders Found, Going into Short Rest (30 Sec)]
+[2022-04-26T12:44:05]-[PREP]-[Waiting]-[Looking for New WorkOrders... (4/5)]
+[2022-04-26T12:44:05]-[PREP]-[Waiting]-[No WorkOrders Found, Going into Short Rest (30 Sec)]
+[2022-04-26T12:44:35]-[PREP]-[Waiting]-[Looking for New WorkOrders... (5/5)]
+[2022-04-26T12:44:35]-[PREP]-[Waiting]-[Going into Long Rest (5 Min)]

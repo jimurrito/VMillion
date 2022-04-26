@@ -5,10 +5,12 @@
 
 # [Modules]
 from datetime import datetime, date
+import hashlib
 import os
 import json
 from time import sleep
 import libvirt
+import hashlib
 
 
 # [Parameters]
@@ -25,23 +27,28 @@ GenLog = "logs/VMD.log"
 
 
 def DocPrep(
-    TYPE: int = 0,
+    TYPE: int = 99,
     HOST: str = "VMDly",
     NAME: str = "Administrator",
     PWD: str = "Password1",
     DiskPath: str = "",
+    ISOPATH: str = "",
+    ISOSUM: str = "",
     Src: str = "templates/autounattend.xml",
 ):
     doc = (open(Src, "r")).read()
-    if TYPE == 0:
-        FLC = open("templates/FLC-default.xml", "r").read()
-    if TYPE == 1:
-        FLC = open("templates/FLC-DomainJn.xml", "r").read()
-    doc = doc.replace("$FLC$", FLC)
+    if TYPE != 99:
+        if TYPE == 0:
+            FLC = open("templates/FLC-Vanilla.xml", "r").read()
+        if TYPE == 1:
+            FLC = open("templates/FLC-DJ.xml", "r").read()
+        doc = doc.replace("$FLC$", FLC)
     doc = doc.replace("$HOST$", HOST)
     doc = doc.replace("$UserName$", NAME)
     doc = doc.replace("$Password$", PWD)
     doc = doc.replace("$DiskPath$", DiskPath)
+    doc = doc.replace("$osPath$", ISOPATH)
+    doc = doc.replace("$osSum$", ISOSUM)
     return doc
 
 
@@ -61,6 +68,41 @@ def VLog(
         (open(f"./{DIR}", "a")).write("\n")
         (open(f"./{DIR}", "a")).write(Output)
     print(Output)
+
+
+
+def SelectMatrix(
+    TYPE: int = 0,
+    IN: int = 0,
+    ROOT: str = "/cd_disk/KVM/iso/"
+):
+    if TYPE == 0:
+        if IN == 0:
+            a = "Windows-Server 19"
+            b = f"{ROOT}winserver_2019.iso"
+        if IN == 1:
+            a = "Windows-Server 22"
+            b = f"{ROOT}winserver_2022.iso"
+        if IN == 2:
+            a = "Windows 10"
+            b = f"{ROOT}windows10_21h2_ENT.iso"
+        if IN == 3:
+            a = "Ubuntu-Server"
+            b = f"{ROOT}ubuntu_server_21.10_amd64.iso"
+        if IN == 4:
+            a = "Ubuntu-Desktop"
+            b = f"{ROOT}ubuntu_desktop_21.04_amd64.iso"
+        c = open(f"{b.replace('.iso','.hash')}","r").read()
+        return a, b, c
+
+    if TYPE == 1:
+        if IN == 0:
+            a = "Vanilla"
+        if IN == 1:
+            a = "Domain Joined"
+        if IN == 2:
+            a = "Domain Controller"
+        return a
 
 
 def VMBuilder(
@@ -175,32 +217,34 @@ def main():
                         HEADER=HEADER,
                         MSG=f"Files for Domain '{HOST}' not Found. Building Domain.",
                     )
+            # [OS-Selection]
+            # WS19      == 0
+            # WS21      == 1
+            # W10       == 2
+            # Ubntu-Svr == 3
+            # Ubntu-Dsk == 4
+            OS, OSPath, OSSum = SelectMatrix(TYPE=0,IN=int(Job["OS"]))
+            VLog(
+                PHASE=PHASE,
+                HEADER=HEADER,
+                MSG=f"Domain '{HOST}' OS will be '{OS}'",
+            )
 
-            # Role-Selection Matrix
-            # Van == 0
-            # DJVan == 1
-            # DC == 2
-            Role = Job["Role"]
-            if Role == "Van":
-                ROLE = 0
-            if Role == "DJVan":
-                ROLE = 1
-            if Role == "DC":
-                ROLE = 2
+            # [Role-Selection]
+            # Vanilla   == 0
+            # DJ        == 1
+            # DC        == 2
+            Role = SelectMatrix(TYPE=1,IN=int(Job["Role"]))
             VLog(
                 PHASE=PHASE,
                 HEADER=HEADER,
                 MSG=f"Domain '{HOST}' Role will be '{Role}'",
             )
 
-            # [Alt-LOG-PREP]
-            PakLog = f"logs/{HOST}_Packer.log"
-            KVMLog = f"logs/{HOST}_KVM.log"
-
             # [DOCMOD]
             # Inject Workorder Params into autounattend.xml
             (open("./answer_files/autounattend.xml", "w")).write(
-                DocPrep(TYPE=ROLE, HOST=HOST, NAME=NAME, PWD=PWD)
+                DocPrep(TYPE=int(Job["Role"]), HOST=HOST, NAME=NAME, PWD=PWD)
             )
             VLog(PHASE=PHASE, HEADER=HEADER, MSG="New AutoUnattend.xml Generated")
             # Inject WorkOrder Params into vars.auto.pkrvars.hcl
@@ -210,6 +254,8 @@ def main():
                     NAME=NAME,
                     PWD=PWD,
                     DiskPath=PATH,
+                    ISOPATH=OSPath,
+                    ISOSUM=OSSum,
                     Src=("templates/vars.pkrvars.hcl"),
                 )
             )
@@ -225,6 +271,7 @@ def main():
             # [PACKER]
             if MountOnly == False:
                 PHASE = "PACKER"
+                PakLog = f"logs/{HOST}_Packer.log"
                 # Init.
                 VLog(PHASE=PHASE, HEADER=HEADER, MSG="Packer Initilizing")
                 os.system(f"packer init ./ > {PakLog}")
@@ -242,9 +289,10 @@ def main():
             # [KVM]
             # Installs New Image as a KVM Domain
             PHASE = "KVM"
+            KVMLog = f"logs/{HOST}_KVM.log"
             VLog(PHASE=PHASE, HEADER=HEADER, MSG="Generating KVM|QEMU Domain")
             VMBuilder(
-                AStrt=True,
+                AStrt=bool(Job["AutoStart"]),
                 HOST=HOST,
                 vCPU=(Job["vCPU"]),
                 RAM=(Job["RAM"]),

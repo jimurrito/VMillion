@@ -28,7 +28,7 @@
             <UserData>
                 <AcceptEula>true</AcceptEula>
                 <FullName>$UserName$</FullName>
-                <Organization>Organization</Organization>
+                <Organization>Labheim</Organization>
             </UserData>
             <EnableFirewall>true</EnableFirewall>
         </component>
@@ -86,7 +86,7 @@
                 <HideLocalAccountScreen>true</HideLocalAccountScreen>
                 <ProtectYourPC>1</ProtectYourPC>
             </OOBE>
-            <RegisteredOrganization>Organization</RegisteredOrganization>
+            <RegisteredOrganization>Labheim</RegisteredOrganization>
             <RegisteredOwner>Owner</RegisteredOwner>
             <DisableAutoDaylightTimeSet>false</DisableAutoDaylightTimeSet>
             <TimeZone>Pacific Standard Time</TimeZone>
