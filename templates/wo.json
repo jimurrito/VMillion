@@ -1,0 +1,20 @@
+{
+    "VMName": "jeff",
+    "OS": "0",
+    "Role": "0",
+    "AutoStart": "0",
+    "vCPU": "2",
+    "RAM": "2048",
+    "vdisks": {
+        "vdisk0": {
+            "Size": "40",
+            "Format": "raw"
+        }
+    },
+    "Network": "br0.14",
+    "Display": "vnc",
+    "Credentials": {
+        "Username": "Administrator",
+        "Password": "YourMom!!1"
+    }
+}
