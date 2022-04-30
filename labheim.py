@@ -2,6 +2,7 @@ from datetime import datetime
 import os
 import re
 
+
 def DocPrep(
     Type: int = 99,
     Host: str = "VMDly",
@@ -31,7 +32,7 @@ def DocPrep(
 def VLog(
     Header: str = "Header",
     MSG: str = "Message",
-    DIR: str = 'log',
+    DIR: str = "log",
 ):
     Time = (datetime.now()).isoformat(timespec="seconds")
     Output = f"[{Time}]-[{Header}]-[{MSG}]"
