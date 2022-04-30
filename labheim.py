@@ -2,6 +2,7 @@ from datetime import datetime
 import os
 import re
 
+
 def DocPrep(
     Type: int = 99,
     Host: str = "VMDly",
@@ -31,7 +32,7 @@ def DocPrep(
 def VLog(
     Header: str = "Header",
     MSG: str = "Message",
-    DIR: str = 'log',
+    DIR: str = "log",
 ):
     Time = (datetime.now()).isoformat(timespec="seconds")
     Output = f"[{Time}]-[{Header}]-[{MSG}]"
@@ -108,19 +109,49 @@ def Packer(cmd: str, Path: str = "./", Plog: str = "PackerLog"):
 
 
 def VMBuilder(
-    AStrt: bool, Host: str, vCPU: str, RAM: str, Net: str, DiskPath: str, Log: str
-):
-    build = open("templates/virt-install-win.temp", "r").read()
-    vCPU = str(vCPU)
-    RAM = str(RAM)
-    if AStrt == True:
-        AStrt = "--autostart"
-    else:
-        AStrt = ""
-    build = build.replace("$Host$", Host)
-    build = build.replace("$vCPU$", vCPU)
-    build = build.replace("$RAM$", RAM)
-    build = build.replace("$Net$", Net)
-    build = build.replace("$DiskPath$", DiskPath)
-    build = build.replace("$AStrt$", AStrt)
-    os.system(f"{build} > {Log}")
+    auto_start: bool,
+    hostname: str,
+    v_cpus: str,
+    ram: str,
+    network_bridge: str,
+    disk_path: str,
+    log_file: str,
+) -> None:
+    """
+    Formats and runs the Build VM command
+
+    Parameters
+    ----------
+    auto_start : bool
+        Set the VM to autostart
+    hostname : str
+        The Hostname of the VM
+    v_cpus : str
+        The number of vCPUs
+    ram : str
+        The amount of RAM
+    network_bridge : str
+        The type of network interface
+    disk_path : str
+        The path to the ISO
+    log_file : str
+        The path to the log file
+
+    Returns
+    -------
+    None
+    """
+
+    command = (
+        open("templates/virt-install-win.temp", "r")
+        .read()
+        .replace("$Host$", str(hostname))
+        .replace("$vCPU$", str(v_cpus))
+        .replace("$RAM$", str(ram))
+        .replace("$Net$", str(network_bridge))
+        .replace("$DiskPath$", str(disk_path))
+        .replace("$AStrt$", "--autostart" if auto_start else "")
+        + f" > {str(log_file)}"
+    )
+
+    os.system(command)
