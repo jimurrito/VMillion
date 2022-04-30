@@ -47,7 +47,7 @@ def main():
             else:
                 sleep(30)
                 n += 1
-                # 30m heart-beat
+                # 30s heart-beat
                 if n == 900:
                     labheim.VLog(
                         Header=Header, MSG=(f"Waiting loop Heart-beat"), DIR=GenLog
@@ -145,7 +145,12 @@ def main():
             # [DOCMOD]
             # Inject Workorder Params into autounattend.xml
             (open("./answer_files/autounattend.xml", "w")).write(
-                labheim.DocPrep(Type=int(Job["Role"]), Host=Host, Name=Name, Pwd=Pwd)
+                labheim.DocPrep(
+                    type=labheim.int2DocType(int(Job["Role"])),
+                    hostname=Host,
+                    username=Name,
+                    password=Pwd,
+                )
             )
             labheim.VLog(
                 Header=Header, MSG="New AutoUnattend.xml Generated", DIR=GenLog
@@ -153,13 +158,13 @@ def main():
             # Inject WorkOrder Params into vars.auto.pkrvars.hcl
             (open("./vars.auto.pkrvars.hcl", "w")).write(
                 labheim.DocPrep(
-                    Host=Host,
-                    Name=Name,
-                    Pwd=Pwd,
-                    DiskPath=Path,
-                    ISOPATH=OSPath,
-                    ISOSUM=OSSum,
-                    Src=("templates/vars.pkrvars.hcl"),
+                    hostname=Host,
+                    username=Name,
+                    password=Pwd,
+                    disk_path=Path,
+                    iso_path=OSPath,
+                    iso_sum=OSSum,
+                    src=("templates/vars.pkrvars.hcl"),
                 )
             )
             labheim.VLog(
@@ -167,7 +172,9 @@ def main():
             )
             # Inject WorkOrder Params into WinRM Config Script
             (open("Post-build/scripts/winRM_config_enable.ps1", "w")).write(
-                labheim.DocPrep(Name=Name, Pwd=Pwd, Src=("templates/winRM.temp.ps1"))
+                labheim.DocPrep(
+                    username=Name, password=Pwd, src=("templates/winRM.temp.ps1")
+                )
             )
             labheim.VLog(
                 Header=Header, MSG="New WinRM Configuration File Generated", DIR=GenLog

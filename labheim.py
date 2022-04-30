@@ -1,37 +1,84 @@
 from datetime import datetime
 import os
 import re
+from enum import IntEnum
+
+
+class DocTypes(IntEnum):
+    FLC_Vanilla = "FLC-Vanilla"
+    FLC_DJ = "FLC-DJ"
+
+
+def int2DocType(i: int) -> DocTypes:
+    # temp solution for DocPrep enum
+    if i == 1:
+        return DocTypes.FLC_Vanilla
+    elif i == 2:
+        return DocTypes.FLC_DJ
+    else:
+        raise Exception("Invalid DocType")
+
 
 def DocPrep(
-    Type: int = 99,
-    Host: str = "VMDly",
-    Name: str = "Administrator",
-    Pwd: str = "Password1",
-    DiskPath: str = "",
-    ISOPATH: str = "",
-    ISOSUM: str = "",
-    Src: str = "templates/autounattend.xml",
-):
-    doc = (open(Src, "r")).read()
-    if Type != 99:
-        if Type == 0:
-            FLC = open("templates/FLC-Vanilla.xml", "r").read()
-        if Type == 1:
-            FLC = open("templates/FLC-DJ.xml", "r").read()
-        doc = doc.replace("$FLC$", FLC)
-    doc = doc.replace("$HOST$", Host)
-    doc = doc.replace("$UserName$", Name)
-    doc = doc.replace("$Password$", Pwd)
-    doc = doc.replace("$DiskPath$", DiskPath)
-    doc = doc.replace("$osPath$", ISOPATH)
-    doc = doc.replace("$osSum$", ISOSUM)
-    return doc
+    type: DocTypes = ...,
+    hostname: str = "VMDly",
+    username: str = "Administrator",
+    password: str = "Password1",
+    disk_path: str = "",
+    iso_path: str = "",
+    iso_sum: str = "",
+    src: str = "templates/autounattend.xml",
+) -> str:
+    """
+    Prepares a string for documentation
+
+    Parameters
+    ----------
+    type : DocTypes
+        The type of document to be prepared
+    hostname : str
+        The Hostname of the VM
+    username : str
+        The Username of the VM
+    password : str
+        The Password of the VM
+    disk_path : str
+        The path to the ISO
+    iso_path : str
+        The path to the ISO
+    iso_sum : str
+        The checksum of the ISO
+    src : str
+        The path to the source file
+
+    Returns
+    -------
+    str
+    """
+    doc = (open(src, "r")).read()
+
+    if isinstance(type, DocTypes):
+        FLC = open(f"templates/{type.value}.xml", "r").read()
+    else:
+        FLC = ""
+
+    if doc.find("$FLC$") != -1:
+        doc.replace("$FLC$", FLC)
+
+    return (
+        doc.replace("$HOST$", hostname)
+        .replace("$UserName$", username)
+        .replace("$Password$", password)
+        .replace("$DiskPath$", disk_path)
+        .replace("$osPath$", iso_path)
+        .replace("$osSum$", iso_sum)
+    )
 
 
 def VLog(
     Header: str = "Header",
     MSG: str = "Message",
-    DIR: str = 'log',
+    DIR: str = "log",
 ):
     Time = (datetime.now()).isoformat(timespec="seconds")
     Output = f"[{Time}]-[{Header}]-[{MSG}]"
