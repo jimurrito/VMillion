@@ -47,8 +47,9 @@ def main():
             else:
                 sleep(30)
                 n += 1
-                # 30m heart-beat
+                
                 if n == 900:
+                    # 30m heart-beat
                     labheim.VLog(
                         Header=Header, MSG=(f"Waiting loop Heart-beat"), DIR=GenLog
                     )
