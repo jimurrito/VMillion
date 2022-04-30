@@ -32,7 +32,7 @@ def main():
 
         # Loop Waiting for WorkOrders
         Header = "IDLE"
-        labheim.VLog(Header=Header, MSG=(f"Waiting for New WorkOrders"), DIR=GenLog)
+        labheim.VLog(Header=Header, MSG=("Waiting for New WorkOrders"), DIR=GenLog)
         n = 0
         while True:
             WorkOrders = os.listdir("WorkOrders/")
