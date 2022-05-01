@@ -1,10 +1,10 @@
 from datetime import datetime
 import os
 import re
-from enum import IntEnum
+from enum import Enum
 
 
-class DocTypes(IntEnum):
+class DocTypes(Enum):
     FLC_Vanilla = "FLC-Vanilla"
     FLC_DJ = "FLC-DJ"
 
