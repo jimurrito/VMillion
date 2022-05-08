@@ -1,1 +1,1 @@
-virt-install --name=$HOST$ $AStrt$ --ram=$RAM$ --vcpus=$vCPU$ --disk path=$DiskPath$,format=raw --import --graphics vnc,listen=0.0.0.0 --noautoconsole --network bridge=$Net$,model=virtio --os-variant win10  --accelerate -v --boot uefi
+virt-install --name=$HOST$ $AStrt$ --ram=$RAM$ --vcpus=$vCPU$ --disk path=$DiskPath$/vdisk0,format=raw --import --graphics vnc,listen=0.0.0.0 --noautoconsole --network bridge=$Net$,model=virtio --os-variant win10  --accelerate -v --boot uefi
